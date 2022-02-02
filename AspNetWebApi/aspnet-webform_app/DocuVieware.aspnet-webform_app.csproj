@@ -160,6 +160,7 @@
     <Content Include="style\styles.css" />
     <Content Include="style\twain_acquisition.css" />
     <Content Include="twain_demo.aspx" />
+    <Content Include="UploadFile.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

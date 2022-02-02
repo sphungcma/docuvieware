@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h3>Upload File</h3>
+    <div style="width: 500px;">
+        <form id="uploadFile" action="/" method="post" style="width: 100%">
+            <label>Web API Url: </label>
+            <input style="width: 100%" type="text" id="fileUploadUrl" name="fileUploadUrl" value="https://localhost:44360/api/saveimage" />
+            <br /> <br />
+            <label>Select File: </label>
+            <input type="file" id="myFile" name="myFile">
+            <br /> <br />
+            <input type="submit" name="submit" value="Upload File" />
+        </form>
+    </div>
+    
+<script>
+    const form = document.getElementById("uploadFile");
+    form.addEventListener('submit', (event) => {
+        //alert("submit");
+
+        event.preventDefault();
+        const xhr = new XMLHttpRequest();
+        let formData = new FormData(form);
+        let myFile = document.getElementById("myFile");
+        let files = myFile.files;
+
+        //formData.append('myFile', files[0], files[0].name);
+        xhr.open('POST', "https://localhost:44360/api/saveimage");
+        xhr.send(formData);
+    });
+</script>
+
+</body>
+</html>

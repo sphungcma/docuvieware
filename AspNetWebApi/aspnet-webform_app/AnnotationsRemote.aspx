@@ -13,9 +13,15 @@
 </head>
 <body>
     <div>
+        <label>JavaScript Onclick: </label>
         <button onclick="onSave()">Save(JS)</button>
     </div>
     <form id="form1" runat="server"> 
+        <div>
+            <label>Form Submit: </label>
+            <button onclick="saveToStream()">Save(JS)</button>
+        </div>
+        <br />
         <cc1:DocuVieware ID="DocuVieware1" runat="server"
             Height="100%"
             Width="100%"

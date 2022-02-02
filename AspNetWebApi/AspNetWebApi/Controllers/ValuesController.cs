@@ -7,12 +7,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AspNetWebApi.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -32,11 +32,12 @@ namespace AspNetWebApi.Controllers
 
         [HttpPost]
         [Route("api/saveimage")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage SaveImage()
         {
             HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
-            var randomFileName = Path.GetRandomFileName();
+            
 
             if (httpRequest.Files.Count > 0)
             {
@@ -46,8 +47,10 @@ namespace AspNetWebApi.Controllers
                 {
                     foreach (string file in httpRequest.Files)
                     {
+                        var randomFileName = Path.GetRandomFileName();
+                        randomFileName = Path.ChangeExtension(randomFileName, null);
                         var postedFile = httpRequest.Files[file];
-                        var filePath = HttpRuntime.AppDomainAppPath + "documents\\" + postedFile.FileName;
+                        var filePath = HttpRuntime.AppDomainAppPath + "documents\\" + randomFileName + "_" + postedFile.FileName;
 
                         postedFile.SaveAs(filePath);
                         docfiles.Add(filePath);
